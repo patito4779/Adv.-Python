@@ -23,7 +23,6 @@ with open(filename) as file:
     print(counts)
 
     
-
     sorted_values = sorted([(values, keys) for keys, values in counts.items()], reverse=True)
     for v, k in sorted_values:
         print(v, k)
