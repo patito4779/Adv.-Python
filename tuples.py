@@ -35,3 +35,4 @@ lst = sorted(lst, reverse=True)  # This arranges  the keys in reverse alphabetic
 print(lst)
 for keys, values in lst[:10]:
     print(values, keys)
+
