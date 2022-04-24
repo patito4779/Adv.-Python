@@ -12,7 +12,6 @@ with open("mbox-short.txt") as file:
             newlines = newlines + "\n" + line
         continue
     #print(newlines)
-
     newlines = newlines.split()
     dict = {}
     emails = []
