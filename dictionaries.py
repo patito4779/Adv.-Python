@@ -18,3 +18,4 @@ with open("file.txt") as file:
             count[name] = count.get(name, 0) + 1
 print(count)
 
+
