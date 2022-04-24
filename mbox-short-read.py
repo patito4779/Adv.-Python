@@ -11,3 +11,4 @@ with fname as file:
         line = line.split()
         if len(line) < 3 or line[0] != "From": continue
         print(line[2])
+        
