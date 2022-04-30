@@ -25,9 +25,8 @@ messages = int(messages[0])
 print(messages)
 
 # Initialize a variable n for the number of bottom emails to be read, let's say the last 10 emails in our Inbox Folder
-n = 5
-#for i in range(1, messages-(messages-n+1), 1)
-for i in range(1, messages, 1):
+n = 10
+for i in range(1, messages-(messages-n+1), 1):
     res, msg = imap.fetch(str(i), "(RFC822)")
     #file = open(path + "/patrick_email_logs.txt", "w")
     for response in msg:
