@@ -25,8 +25,9 @@ messages = int(messages[0])
 print(messages)
 
 # Initialize a variable n for the number of bottom emails to be read, let's say the last 10 emails in our Inbox Folder
-n = 10
-for i in range(1, messages-(messages-n+1), 1):
+n = 5
+#for i in range(1, messages-(messages-n+1), 1)
+for i in range(1, messages, 1):
     res, msg = imap.fetch(str(i), "(RFC822)")
     #file = open(path + "/patrick_email_logs.txt", "w")
     for response in msg:
@@ -35,15 +36,13 @@ for i in range(1, messages-(messages-n+1), 1):
             #str(print(dir(msg))) + "\n" + str(print(msg.keys())) # This line prints the methods and keys available with the msg function
             
             for key in msg.keys():
-                key = key.rstrip()
                 keys, encoding = decode_header(msg.get(key))[0]
-                try: 
+                try:
                     if isinstance(keys, bytes):
-                        keys = key.decode(encoding)
-                except: keys = key.encode(encoding)
+                        keys = key.decode(encoding = "utf-8", errors = "ignore")
+                except: keys = key.encode(encoding = "utf-8", errors = "ignore")
+                
                 print(key + ":", keys, end = "\n")
-            
-
             if msg.is_multipart():
                 # iterating over the parts of the email
                 for part in msg.walk():
@@ -52,7 +51,7 @@ for i in range(1, messages-(messages-n+1), 1):
                     content_disposition = str(part.get("Content-Disposition"))
                     try:
                         # get the body of the email
-                        body = part.get_payload(decode=True).decode("utf-8")
+                        body = part.get_payload(decode=True).decode(encoding = "utf-8", errors = "ignore")
                     except:
                         pass
                     if content_type == "text/plain" and "attachment" not in content_disposition:
@@ -67,7 +66,7 @@ for i in range(1, messages-(messages-n+1), 1):
                                 if key == "Subject":
                                     keys, encoding = decode_header(msg.get(key))[0]
                                     if isinstance(keys, bytes):
-                                        keys = keys.decode(encoding)
+                                        keys = keys.decode(encoding = "utf-8", errors = "ignore")
                                 
                             foldername = naming(keys)
                             if not os.path.isdir(foldername):
@@ -76,13 +75,12 @@ for i in range(1, messages-(messages-n+1), 1):
                             filepath = os.path.join(foldername, filename)
                             # download attachment and save it
                             open(filepath, "wb").write(part.get_payload(decode=True))
-            
             else:
             # extract content type of email
                 content_type = msg.get_content_type()
-                body = msg.get_payload(decode=True).decode("utf-8")
+                body = msg.get_payload(decode=True).decode(encoding = "utf-8", errors = "ignore")
                 if content_type == "text/plain":
-                    print(body.encoding("utf-8"))
+                    print(body)
             
             if content_type == "text/html":
                 pass
