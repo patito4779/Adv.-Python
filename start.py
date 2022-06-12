@@ -13,3 +13,9 @@ times = [u*u for u in numbers]
 
 print(numbers)
 print(times)
+
+
+def hi(name):
+    return "Hi " + name + " how are you"
+
+print(hi("patrick"))

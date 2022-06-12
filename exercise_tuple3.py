@@ -1,4 +1,4 @@
-
+# THis program counts the number of characters (only letters) in a file and gets the letters with the most occurence
 import sys
 filename = input("Enter a file name: ")
 if len(filename) < 1 : filename = "mbox-short.txt"

@@ -38,8 +38,8 @@ for i in range(1, messages-(messages-n+1), 1):
                 keys, encoding = decode_header(msg.get(key))[0]
                 try:
                     if isinstance(keys, bytes):
-                        keys = key.decode(encoding = "utf-8", errors = "ignore")
-                except: keys = key.encode(encoding = "utf-8", errors = "ignore")
+                        keys = key.decode(encoding = "utf-8", errors = "ignore").strip()
+                except: keys = key.encode(encoding = "utf-8", errors = "ignore").strip()
                 
                 print(key + ":", keys, end = "\n")
             if msg.is_multipart():
@@ -50,7 +50,7 @@ for i in range(1, messages-(messages-n+1), 1):
                     content_disposition = str(part.get("Content-Disposition"))
                     try:
                         # get the body of the email
-                        body = part.get_payload(decode=True).decode(encoding = "utf-8", errors = "ignore")
+                        body = part.get_payload(decode=True).decode(encoding = "utf-8", errors = "ignore").strip()
                     except:
                         pass
                     if content_type == "text/plain" and "attachment" not in content_disposition:
@@ -77,7 +77,7 @@ for i in range(1, messages-(messages-n+1), 1):
             else:
             # extract content type of email
                 content_type = msg.get_content_type()
-                body = msg.get_payload(decode=True).decode(encoding = "utf-8", errors = "ignore")
+                body = msg.get_payload(decode=True).decode(encoding = "utf-8", errors = "ignore").strip()
                 if content_type == "text/plain":
                     print(body)
             

@@ -22,7 +22,9 @@ with open("mbox-short.txt") as file:
    
     for word in time:
         newtime = word.split(":")
-        dict[newtime[0]] = dict.get(newtime[0], 0) + 1
+        print(newtime)
+        dict[newtime[0]] = dict.get(newtime[0], 0) + 1  # Note that this line is a For loop on its own
+    print(dict)
     for k, v in sorted(dict.items()):
         print(k, v)
         
